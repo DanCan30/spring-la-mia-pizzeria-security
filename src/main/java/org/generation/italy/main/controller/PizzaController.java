@@ -37,13 +37,7 @@ public class PizzaController {
 	private IngredientService ingredientService;
 
 	@GetMapping("/")
-	public String getIndex(Authentication auth, Model model) {
-		
-		if (auth != null) {
-					
-			String username = auth.getName();
-			model.addAttribute("username", username);
-		}
+	public String getIndex(Model model) {
 		
 		List<Pizza> pizzas = pizzaService.findAll();
 		

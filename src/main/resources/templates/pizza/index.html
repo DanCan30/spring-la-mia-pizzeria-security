@@ -9,7 +9,7 @@
 <body>
     <h1>Pizzeria</h1>
     
-    <h3 th:if="${username != null}">Logged as [[${username}]]</h3>
+    <h3 sec:authorize="isAuthenticated()">Logged as <span sec:authentication="name"></span></h3>
     
     <a href="/pizza/create">
     	Add a new pizza...
