@@ -11,6 +11,7 @@ import org.generation.italy.main.service.IngredientService;
 import org.generation.italy.main.service.PizzaService;
 import org.generation.italy.main.service.PromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,12 +37,17 @@ public class PizzaController {
 	private IngredientService ingredientService;
 
 	@GetMapping("/")
-	public String getIndex(Model model) {
+	public String getIndex(Authentication auth, Model model) {
+		
+		if (auth != null) {
+					
+			String username = auth.getName();
+			model.addAttribute("username", username);
+		}
 		
 		List<Pizza> pizzas = pizzaService.findAll();
 		
 		model.addAttribute("pizzas", pizzas);
-		
 		return "pizza/index";
 	}
 	
